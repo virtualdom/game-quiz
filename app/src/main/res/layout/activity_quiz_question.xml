@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="edu.utdallas.ui_quiz.QuizQuestionActivity">
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <Button
+            android:id="@+id/falseBtn"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="360dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="False"
+            android:textColor="@android:color/white"
+            android:textSize="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/trueBtn"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="360dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="True"
+            android:textColor="@android:color/white"
+            android:textSize="70dp"
+            app:layout_constraintBottom_toTopOf="@+id/falseBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="A question typically goes here"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/scoreText" />
+
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textSize="40dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

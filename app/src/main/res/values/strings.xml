@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ui-quiz</string>
+
+    <string name="title_activity_quiz_question">QuizQuestionActivity</string>
 </resources>
