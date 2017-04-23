@@ -25,7 +25,7 @@ public class QuizQuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        controller = new QuestionsController(getResources());
+        controller = new QuestionsController(getResources(), getApplicationContext());
         setContentView(R.layout.activity_quiz_question);
 
         mContentView = findViewById(R.id.fullscreen_content);

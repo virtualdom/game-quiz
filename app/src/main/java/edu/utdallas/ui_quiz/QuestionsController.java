@@ -1,5 +1,6 @@
 package edu.utdallas.ui_quiz;
 
+import android.content.Context;
 import android.content.res.Resources;
 
 import java.io.IOException;
@@ -12,8 +13,8 @@ public class QuestionsController {
     private int currentQuestionIndex = 0;
     private int score = 0;
 
-    public QuestionsController (Resources resources) {
-        service = new QuestionsServices(resources);
+    public QuestionsController (Resources resources, Context c) {
+        service = new QuestionsServices(resources, c);
         try {
             questions = service.getQuestions();
         } catch (IOException ex) {
@@ -26,6 +27,15 @@ public class QuestionsController {
         currentQuestionIndex = 0;
         score = 0;
         Collections.shuffle(questions);
+    }
+
+    public boolean addQuestion (String question, String answer) {
+        try {
+            service.addQuestion(new Question(question, answer));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public Question getQuestion () {

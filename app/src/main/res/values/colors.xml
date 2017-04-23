@@ -3,6 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="true_button_pressed">#67981A</color>
+    <color name="true_button_focused">#4a6d12</color>
+    <color name="true_button_default">#D6D7D7</color>
+    <color name="false_button_pressed">#CA0813</color>
+    <color name="false_button_focused">#ab070f</color>
+    <color name="false_button_default">#D6D7D7</color>
     <color name="black_overlay">#66000000</color>
 </resources>
