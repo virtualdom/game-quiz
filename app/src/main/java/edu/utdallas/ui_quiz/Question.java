@@ -17,6 +17,15 @@ public class Question {
         this.additionalInfo = "Thanks for submitting this question!";
     }
 
+
+    public Question (String question, String answer) {
+        this.question = question;
+        this.additionalInfo = "Thanks for submitting this question!";
+
+        if (answer.toLowerCase().trim().equals("t")) this.answer = true;
+        else this.answer = false;
+    }
+
     public Question (String question, boolean answer, String additionalInfo) {
         this.question = question;
         this.answer = answer;
@@ -30,6 +39,8 @@ public class Question {
         if (answer.toLowerCase().trim().equals("t")) this.answer = true;
         else this.answer = false;
     }
+
+    public String toString () { return question + "\t" + (answer ? "t" : "f") + "\t" + additionalInfo; }
 
     public String getAdditionalInfo () {
         return additionalInfo;

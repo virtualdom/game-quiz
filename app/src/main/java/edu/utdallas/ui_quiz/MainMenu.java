@@ -10,7 +10,10 @@ import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
     int QUIZ = 0;
-    int QUIZ_QUIT = -1;
+    int ADD = 1;
+    int QUIT = -1;
+    int SUCCESS = 1;
+    int FAILURE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         final Button quizBtn = (Button) findViewById(R.id.quizBtn);
+        final Button addQBtn = (Button) findViewById(R.id.addQuestionBtn);
 
         final MainMenu self = this;
 
@@ -28,12 +32,20 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+
+        addQBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent addQIntent = new Intent(self, AddQuestionActivity.class);
+                startActivityForResult(addQIntent, ADD);
+
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == QUIZ) {
-            if (resultCode == QUIZ_QUIT) {
+            if (resultCode == QUIT) {
                 Context context = getApplicationContext();
                 CharSequence text = "QUIZ QUIT";
                 int duration = Toast.LENGTH_SHORT;
@@ -48,6 +60,26 @@ public class MainMenu extends AppCompatActivity {
 
                 Context context = getApplicationContext();
                 CharSequence text = "YOUR SCORE: " + score;
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        } else if (requestCode == ADD) {
+            if (resultCode == QUIT) {
+                Context context = getApplicationContext();
+                CharSequence text = "Question discarded";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            } else if (resultCode == SUCCESS){
+                Context context = getApplicationContext();
+                CharSequence text = "Question added!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            } else {
+                Context context = getApplicationContext();
+                CharSequence text = "Oops! Failed to add your question!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
