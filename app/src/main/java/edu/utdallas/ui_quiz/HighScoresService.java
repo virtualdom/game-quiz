@@ -7,11 +7,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,26 +26,35 @@ public class HighScoresService {
 
     public HighScoresService(Context context) {
         this.context = context;
-        this.highScores = new ArrayList<>();
+        this.highScores = new ArrayList<HighScore>();
         this.file = new File(context.getFilesDir(), fileName);
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
 
-            BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
-            while ((line = br.readLine()) != null) {
+            InputStream inputStream = context.openFileInput(fileName);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader questionFile = new BufferedReader(inputStreamReader);
+
+            while (questionFile.ready()) {
+                line = questionFile.readLine();
+
+                if (line.trim().equals("")) break;
+
                 String split[] = line.split("\t");
-                HighScore score = new HighScore(split[0], Integer.parseInt(split[1]));
+                HighScore score = new HighScore(split[0], Integer.parseInt(split[1].trim()));
                 this.highScores.add(score);
             }
 
+            questionFile.close();
+            inputStreamReader.close();
+            inputStream.close();
+
             this.sort();
 
-        } catch (IOException e) {
-
-        }
+        } catch (IOException e) { }
     }
 
     public void addHighScore(HighScore highScore) {
@@ -52,18 +63,25 @@ public class HighScoresService {
         while(this.highScores.size() > 5) {
             this.highScores.remove(5);
         }
+        this.writeToFile();
     }
 
     private void writeToFile() {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            for(HighScore h: highScores) {
-                bw.write(h.toString());
-                bw.newLine();
-            }
-        } catch (IOException e) {
+        String separator = System.getProperty("line.separator");
 
-        }
+        file.delete();
+        try {
+            file.createNewFile();
+            FileOutputStream storageFileOut = context.openFileOutput(fileName, Context.MODE_APPEND);
+            OutputStreamWriter storageWriter = new OutputStreamWriter(storageFileOut);
+            for(HighScore h: highScores) {
+                storageWriter.append(h.toString() + separator);
+            }
+
+            storageWriter.flush();
+            storageWriter.close();
+            storageFileOut.close();
+        } catch (IOException e) { }
     }
 
     public ArrayList<HighScore> getHighScores() {
@@ -74,8 +92,12 @@ public class HighScoresService {
         Collections.sort(highScores, new Comparator<HighScore>() {
             @Override
             public int compare(HighScore h1, HighScore h2) {
-                return (new Integer(h1.getScore())).compareTo(new Integer(h2.getScore()));
+                return (new Integer(h2.getScore())).compareTo(new Integer(h1.getScore()));
             }
         });
+    }
+
+    public boolean isHighScore(int score){
+        return highScores.size() < 5 || highScores.get(highScores.size() - 1).getScore() < score;
     }
 }
