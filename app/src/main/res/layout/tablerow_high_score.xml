@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nameRow"
+        android:layout_width="0dp"
+        android:layout_column="1"
+        android:layout_weight="0.5"
+        android:padding="5dp"
+        android:text="Name"
+        android:textAlignment="textStart"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/scoreRow"
+        android:layout_column="2"
+        android:text="Score"
+        android:padding="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:textAlignment="textEnd"
+        android:textSize="24sp"/>
+</TableRow>

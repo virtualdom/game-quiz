@@ -21,6 +21,8 @@
             android:label="@string/title_activity_quiz_question"
             android:theme="@style/FullscreenTheme"/>
         <activity android:name=".AddQuestionActivity"/>
+        <activity android:name=".NewHighScoreActivity" />
+        <activity android:name=".HighScoresActivity"></activity>
     </application>
 
 </manifest>
