@@ -19,6 +19,6 @@ public class HighScore {
     }
 
     public String toString() {
-        return String.format("%s\t%d", this.name, this.score);
+        return this.name + "\t" + this.score;
     }
 }

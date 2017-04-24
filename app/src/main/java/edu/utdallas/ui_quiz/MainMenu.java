@@ -11,9 +11,12 @@ import android.widget.Toast;
 public class MainMenu extends AppCompatActivity {
     int QUIZ = 0;
     int ADD = 1;
+    int HIGH = 2;
     int QUIT = -1;
     int SUCCESS = 1;
     int FAILURE = 0;
+
+    MainMenu self;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +25,14 @@ public class MainMenu extends AppCompatActivity {
 
         final Button quizBtn = (Button) findViewById(R.id.quizBtn);
         final Button addQBtn = (Button) findViewById(R.id.addQuestionBtn);
+        final Button highBtn = (Button) findViewById(R.id.highScoresBtn);
 
-        final MainMenu self = this;
+        this.self = this;
 
         quizBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent quizIntent = new Intent(self, QuizQuestionActivity.class);
                 startActivityForResult(quizIntent, QUIZ);
-
             }
         });
 
@@ -37,6 +40,14 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent addQIntent = new Intent(self, AddQuestionActivity.class);
                 startActivityForResult(addQIntent, ADD);
+
+            }
+        });
+
+        highBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent highScoreIntent = new Intent(self, HighScoresActivity.class);
+                startActivity(highScoreIntent);
 
             }
         });
@@ -52,17 +63,13 @@ public class MainMenu extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             } else {
-                int score = resultCode;
-
-
-                // DO THINGS WITH THE SCORE HERE!
-
-
-                Context context = getApplicationContext();
-                CharSequence text = "YOUR SCORE: " + score;
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                if((new HighScoresService(this).isHighScore(resultCode))) {
+                    Intent addHighIntent = new Intent(self, NewHighScoreActivity.class);
+                    addHighIntent.putExtra("score", String.valueOf(resultCode));
+                    startActivityForResult(addHighIntent, HIGH);
+                } else {
+                    startActivity(new Intent(self, HighScoresActivity.class));
+                }
             }
         } else if (requestCode == ADD) {
             if (resultCode == QUIT) {
@@ -84,6 +91,9 @@ public class MainMenu extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
+        } else if (requestCode == HIGH) {
+            Intent highScoreIntent = new Intent(self, HighScoresActivity.class);
+            startActivity(highScoreIntent);
         }
     }
 }
