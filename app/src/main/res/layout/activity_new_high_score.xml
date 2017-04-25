@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:text="Score"
         android:textAlignment="center"
-        android:textSize="36sp"
+        android:textSize="44sp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         android:layout_marginStart="61dp"

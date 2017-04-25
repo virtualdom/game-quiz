@@ -11,7 +11,7 @@
         android:padding="5dp"
         android:text="Name"
         android:textAlignment="textStart"
-        android:textSize="32sp" />
+        android:textSize="36sp" />
     <TextView
         android:id="@+id/scoreRow"
         android:layout_column="2"
@@ -20,5 +20,5 @@
         android:layout_width="0dp"
         android:layout_weight="0.5"
         android:textAlignment="textEnd"
-        android:textSize="32sp"/>
+        android:textSize="36sp"/>
 </TableRow>
