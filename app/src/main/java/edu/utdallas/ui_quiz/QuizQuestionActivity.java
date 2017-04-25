@@ -7,9 +7,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class QuizQuestionActivity extends AppCompatActivity {
@@ -42,20 +46,37 @@ public class QuizQuestionActivity extends AppCompatActivity {
 
     private void update() {
         currentQuestion = controller.getQuestion();
-        scoreText.setText("" + controller.getScore());
+        scoreText.setText(String.valueOf(controller.getScore()));
         questionText.setText(currentQuestion.getQuestion());
     }
 
     private void showAdditionalInfo (boolean correct) {
-        // REPLACE THIS TO SHOW A POP UP WITH
-        // THE ADDITIONAL INFO. AND IF THEY GET
-        // THE QUESTION WRONG, HAVE THIS ACTIVITY
-        // FINISH() WHEN THEY DISMISS THE ADDITIONAL
-        // INFO
         if (!correct) {
-            Intent finishedQuizIntent = new Intent();
-            setResult(controller.getScore(),finishedQuizIntent);
-            finish();
+            trueBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { return; }
+            });
+
+            falseBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    return;
+                }
+            });
+            LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            popupWindow.showAtLocation(findViewById(R.id.fullscreen_content), Gravity.CENTER_HORIZONTAL,0,0);
+            ((TextView)popupWindow.getContentView().findViewById(R.id.popup_text)).setText(currentQuestion.getAdditionalInfo());
+            ((Button)popupWindow.getContentView().findViewById(R.id.dismissBtn)).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent finishedQuizIntent = new Intent();
+                    setResult(controller.getScore(),finishedQuizIntent);
+                    finish();
+                }
+            });
+
         }
     }
 
