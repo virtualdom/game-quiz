@@ -21,6 +21,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
+        getSupportActionBar().hide();
 
         controller = new QuestionsController(getResources(), getApplicationContext());
 

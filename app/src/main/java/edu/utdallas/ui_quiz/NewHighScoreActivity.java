@@ -23,6 +23,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_high_score);
+        getSupportActionBar().hide();
 
         this.highScoresService = new HighScoresService(this);
 

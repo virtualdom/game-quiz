@@ -1,5 +1,6 @@
 package edu.utdallas.ui_quiz;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        getSupportActionBar().hide();
 
         final Button quizBtn = (Button) findViewById(R.id.quizBtn);
         final Button addQBtn = (Button) findViewById(R.id.addQuestionBtn);
