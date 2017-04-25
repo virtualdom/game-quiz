@@ -2,12 +2,14 @@ package edu.utdallas.ui_quiz;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -152,5 +154,34 @@ public class QuizQuestionActivity extends AppCompatActivity {
         });
 
         beginQuiz();
+    }
+
+    /**
+     * On swipe left answers false, on swipe right answers true
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float distance = 200;
+        float xDown = 0, xUp, delta;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                xDown = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                xUp = event.getX();
+                delta = xUp - xDown;
+                if(Math.abs(delta) > distance) {
+                    if(delta > 0) {
+                        // Left to Right
+                        answer(true);
+                    } else {
+                        // Right to Left
+                        answer(false);
+                    }
+                }
+                break;
+        }
+
+        return super.onTouchEvent(event);
     }
 }

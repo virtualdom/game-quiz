@@ -10,5 +10,5 @@
         android:padding="5dp"
         android:text="No High Scores!"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="32sp" />
 </TableRow>
