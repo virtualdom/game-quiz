@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
         });
         this.nameCtl = (EditText) findViewById(R.id.nameCtl);
         this.scoreText = (TextView) findViewById(R.id.scoreText);
+        this.scoreText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(3) });
 
         Intent i = this.getIntent();
         this.scoreText.setText(i.getStringExtra("score"));
@@ -41,7 +43,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
 
     public void addHighScore() {
         if(this.nameCtl.getText().length() < 3) {
-            this.nameCtl.setError("Enter at least 3 characters");
+            this.nameCtl.setError("Name must be 3 characters");
             return;
         } else {
             this.highScoresService.addHighScore(new HighScore(this.nameCtl.getText().toString(),
