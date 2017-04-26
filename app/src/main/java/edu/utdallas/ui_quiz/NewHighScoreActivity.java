@@ -42,6 +42,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
         });
         this.nameCtl = (EditText) findViewById(R.id.nameCtl);
         this.scoreText = (TextView) findViewById(R.id.scoreText);
+        // make sure the text is no more than 3 characters
         this.scoreText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(3) });
 
         Intent i = this.getIntent();

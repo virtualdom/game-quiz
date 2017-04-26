@@ -31,12 +31,14 @@ public class HighScoresActivity extends AppCompatActivity {
 
         if(!highScores.isEmpty()) {
             for (HighScore h : highScores) {
+                // create a table row and then assign text to the TextViews within
                 TableRow row = (TableRow) getLayoutInflater().inflate(R.layout.tablerow_high_score, null);
                 ((TextView) row.findViewById(R.id.nameRow)).setText(h.getName());
                 ((TextView) row.findViewById(R.id.scoreRow)).setText(String.valueOf(h.getScore()));
                 tableLayout.addView(row);
             }
         } else {
+            // if there are no high scores in the list, display that instead of nothing
             TableRow row = (TableRow) this.getLayoutInflater().inflate(R.layout.tablerow_no_high_scores, null);
             tableLayout.addView(row);
         }

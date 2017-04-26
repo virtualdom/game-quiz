@@ -39,15 +39,17 @@ public class HighScoresService {
                 file.createNewFile();
             }
 
+
             String line;
             InputStream inputStream = context.openFileInput(fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader questionFile = new BufferedReader(inputStreamReader);
 
+            // Read the file line by line to get scores
             while (questionFile.ready()) {
                 line = questionFile.readLine();
 
-                if (line.trim().equals("")) break;
+                if (line.trim().equals("")) break; // gets rid of empty last line
 
                 String split[] = line.split("\t");
                 HighScore score = new HighScore(split[0], Integer.parseInt(split[1].trim()));
@@ -78,6 +80,7 @@ public class HighScoresService {
     private void writeToFile() {
         String separator = System.getProperty("line.separator");
 
+        // rewrite file completely
         file.delete();
         try {
             file.createNewFile();
@@ -97,7 +100,7 @@ public class HighScoresService {
         return this.highScores;
     }
 
-    // Helper method to sort the list
+    // Helper method to sort the list in descending order
     private void sort() {
         Collections.sort(highScores, new Comparator<HighScore>() {
             @Override
@@ -108,6 +111,7 @@ public class HighScoresService {
     }
 
     // Checks to see if a score is in fact a high score
+    // either there are not 5 high scores yet or score is at least higher than the smallest score
     public boolean isHighScore(int score){
         return highScores.size() < 5 || highScores.get(highScores.size() - 1).getScore() < score;
     }
