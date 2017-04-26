@@ -14,11 +14,22 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// Question Services
+// This class interfaces with the
+// question bank file to retrieve
+// and insert questions.
+//
+// Primary author(s): Dominic
 public class QuestionsServices {
     Resources resources;
     Context context;
     String storageFilename = "questionBank.txt";
 
+    // Constructor
+    // If the insertable question bank hasn't been
+    // created, make a new one.
     public QuestionsServices (Resources resources, Context context) {
         this.resources = resources;
         this.context = context;
@@ -47,6 +58,9 @@ public class QuestionsServices {
         }
     }
 
+    // Add Question
+    // Given a new question, write it
+    // to the question storage file.
     public void addQuestion (Question question) throws Exception {
         String separator = System.getProperty("line.separator");
         FileOutputStream storageFileOut = context.openFileOutput(storageFilename, Context.MODE_APPEND);
@@ -57,6 +71,9 @@ public class QuestionsServices {
         storageFileOut.close();
     }
 
+    // Get Questions
+    // Reads through the question file and returns
+    // an ArrayList of questions.
     public ArrayList<Question> getQuestions () throws IOException {
         ArrayList<Question> questions = new ArrayList<Question>();
         String questionLine;
