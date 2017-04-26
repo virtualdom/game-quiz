@@ -21,6 +21,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
+        getSupportActionBar().hide();
 
         controller = new QuestionsController(getResources(), getApplicationContext());
 
@@ -75,7 +76,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                         toast.show();
                     } else {
                         Intent finishedAddingIntent = new Intent();
-                        if (controller.addQuestion(questionText.getText().toString().trim(), trueBtn.isPressed() ? "t" : "f"))
+                        if (controller.addQuestion(questionText.getText().toString().replaceAll("\\s", " ").trim(), trueBtn.isPressed() ? "t" : "f"))
                             setResult(SUCCESS, finishedAddingIntent);
                         else
                             setResult(FAILURE, finishedAddingIntent);
