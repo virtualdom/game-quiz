@@ -51,11 +51,11 @@ public class NewHighScoreActivity extends AppCompatActivity {
 
     // Gets name and score and inserts them into the high score list
     public void addHighScore() {
-        if(this.nameCtl.getText().length() < 3) {
+        if(this.nameCtl.getText().toString().trim().length() < 3) {
             this.nameCtl.setError("Name must be 3 characters");
             return;
         } else {
-            this.highScoresService.addHighScore(new HighScore(this.nameCtl.getText().toString(),
+            this.highScoresService.addHighScore(new HighScore(this.nameCtl.getText().toString().trim().toUpperCase(),
                     Integer.parseInt(this.scoreText.getText().toString())));
             this.finish();
         }
