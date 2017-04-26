@@ -18,6 +18,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// HighScoresService
+// Class to hold the list of high scores and to read/write them to a file
+//
+// Primary author(s): Steven
 public class HighScoresService {
     private static final String fileName = "highScores.txt";
     private Context context;
@@ -57,6 +63,8 @@ public class HighScoresService {
         } catch (IOException e) { }
     }
 
+    // Adds a high score to the list of high scores
+    // Preserves the largest 5 scores
     public void addHighScore(HighScore highScore) {
         this.highScores.add(highScore);
         this.sort();
@@ -66,6 +74,7 @@ public class HighScoresService {
         this.writeToFile();
     }
 
+    // Writes the scores to file, replaces the file completely with each write
     private void writeToFile() {
         String separator = System.getProperty("line.separator");
 
@@ -88,6 +97,7 @@ public class HighScoresService {
         return this.highScores;
     }
 
+    // Helper method to sort the list
     private void sort() {
         Collections.sort(highScores, new Comparator<HighScore>() {
             @Override
@@ -97,6 +107,7 @@ public class HighScoresService {
         });
     }
 
+    // Checks to see if a score is in fact a high score
     public boolean isHighScore(int score){
         return highScores.size() < 5 || highScores.get(highScores.size() - 1).getScore() < score;
     }

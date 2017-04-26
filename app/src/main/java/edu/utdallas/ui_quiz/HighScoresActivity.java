@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// HighScoreActivity
+// Activity that shows a list of high scores
+//
+// Primary author(s): Steven
 public class HighScoresActivity extends AppCompatActivity {
     private HighScoresService highScoresService;
 

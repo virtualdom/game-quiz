@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// NewHighScoreActivity
+// Class to allow user to add a new high score to the list
+//
+// Primary author(s): Steven
 public class NewHighScoreActivity extends AppCompatActivity {
     private HighScoresService highScoresService;
     private Button submitBtn;
@@ -41,6 +47,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
         this.scoreText.setText(i.getStringExtra("score"));
     }
 
+    // Gets name and score and inserts them into the high score list
     public void addHighScore() {
         if(this.nameCtl.getText().length() < 3) {
             this.nameCtl.setError("Name must be 3 characters");
