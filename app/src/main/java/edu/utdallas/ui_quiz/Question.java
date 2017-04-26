@@ -1,10 +1,18 @@
 package edu.utdallas.ui_quiz;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// Question class
+// This class represents a single question,
+// its answer, and any additional information.
+//
+// Primary author(s): Dominic
 public class Question {
     private String question;
     private boolean answer;
     private String additionalInfo;
 
+    // Various constructors
     public Question () {
         question = "";
         answer = false;
@@ -16,7 +24,6 @@ public class Question {
         this.answer = answer;
         this.additionalInfo = "Thanks for submitting this question!";
     }
-
 
     public Question (String question, String answer) {
         this.question = question;
@@ -40,16 +47,16 @@ public class Question {
         else this.answer = false;
     }
 
+    // Serializer method
     public String toString () { return question + "\t" + (answer ? "t" : "f") + "\t" + additionalInfo; }
 
+    // Accessor methods
     public String getAdditionalInfo () {
         return additionalInfo;
     }
-
     public String getQuestion () {
         return question;
     }
-
     public boolean getAnswer () {
         return answer;
     }

@@ -11,12 +11,26 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// Add Question Activity
+// On this screen, users get
+// an opportunity to add their
+// own True/False question to
+// the quiz game.
+//
+// Primary author(s): Dominic
+
 public class AddQuestionActivity extends AppCompatActivity {
     QuestionsController controller;
     final int SUCCESS = 1;
     final int FAILURE = 0;
     final int QUIT = -1;
 
+    // On Activity creation
+    // This method gets a reference to a controller
+    // and sets the button press handlers for the
+    // three buttons
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +44,9 @@ public class AddQuestionActivity extends AppCompatActivity {
         final Button falseBtn = (Button) findViewById(R.id.setFalseBtn);
         final Button submitBtn = (Button) findViewById(R.id.submitBtn);
 
+        // if the true or false buttons are pressed,
+        // unpress the opposite button and set the
+        // pressed one as held down
         trueBtn.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -56,6 +73,9 @@ public class AddQuestionActivity extends AppCompatActivity {
             }
         });
 
+        // if all inputs are given, allow
+        // the question to be added and
+        // complete the activity
         submitBtn.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -88,6 +108,10 @@ public class AddQuestionActivity extends AppCompatActivity {
         });
     }
 
+    // Back Button Handler
+    // If the user presses the back button,
+    // finish the activity without saving
+    // the question.
     @Override
     public void onBackPressed() {
         Intent i = new Intent();

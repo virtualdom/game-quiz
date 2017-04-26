@@ -16,6 +16,11 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+// Dominic Joseph - dxj120030
+// Steven Hogue - sdh140330
+// Quiz Activity
+//
+// Primary author(s): Dominic
 public class QuizQuestionActivity extends AppCompatActivity {
     private final Handler mHideHandler = new Handler();
     private View mContentView;
@@ -28,6 +33,9 @@ public class QuizQuestionActivity extends AppCompatActivity {
 
     private static int QUIT = -1;
 
+    // On activity creation
+    // Simply get ahold of all onpage
+    // components.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,17 +47,28 @@ public class QuizQuestionActivity extends AppCompatActivity {
         scoreText = (TextView) findViewById(R.id.scoreText);
     }
 
+    // Begin the quiz
     private void beginQuiz () {
         controller.reset();
         update();
     }
 
+    // Update the current UI
     private void update() {
         currentQuestion = controller.getQuestion();
         scoreText.setText(String.valueOf(controller.getScore()));
         questionText.setText(currentQuestion.getQuestion());
     }
 
+    // Show a dismissable popup that contains
+    // additional information about the question.
+    //
+    // This takes a boolean because, at one point,
+    // we were considering showing additional info
+    // even if they get the answer correct. If that
+    // were the case, we wouldn't want the "Dismiss"
+    // button to end the activity. This has been scrapped
+    // for now.
     private void showAdditionalInfo (boolean correct) {
         if (!correct) {
             trueBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +99,14 @@ public class QuizQuestionActivity extends AppCompatActivity {
         }
     }
 
+    // submit an answer to the question
     private void answer (boolean answer) {
         boolean correct = controller.answerQuestion(answer);
         showAdditionalInfo(correct);
         if (correct) update();
     }
 
+    // quit the quiz when the back button is pressed
     @Override
     public void onBackPressed() {
         // REPLACE THIS TO SOMEHOW ASK THE
@@ -96,6 +117,9 @@ public class QuizQuestionActivity extends AppCompatActivity {
         finish();
     }
 
+    // The next three functions were added automatically
+    // by Android Studio when we asked it to create a
+    // FullScreenActivity.
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -130,6 +154,8 @@ public class QuizQuestionActivity extends AppCompatActivity {
         }
     };
 
+    // Set callbacks, including True/False button click
+    // listeners.
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -145,7 +171,6 @@ public class QuizQuestionActivity extends AppCompatActivity {
                 answer(true);
             }
         });
-
         falseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,33 +180,4 @@ public class QuizQuestionActivity extends AppCompatActivity {
 
         beginQuiz();
     }
-//
-//    /**
-//     * On swipe left answers false, on swipe right answers true
-//     */
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        float distance = 200;
-//        float xDown = 0, xUp, delta;
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                xDown = event.getX();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                xUp = event.getX();
-//                delta = xUp - xDown;
-//                if(Math.abs(delta) > distance) {
-//                    if(delta > 0) {
-//                        // Left to Right
-//                        answer(true);
-//                    } else {
-//                        // Right to Left
-//                        answer(false);
-//                    }
-//                }
-//                break;
-//        }
-//
-//        return super.onTouchEvent(event);
-//    }
 }
