@@ -28,7 +28,7 @@ public class MainMenu extends AppCompatActivity {
 
     // On Main Menu Creation
     // Set Click listeners for each of the
-    // menu optoins
+    // menu options
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
